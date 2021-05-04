@@ -1,0 +1,69 @@
+body {
+   background-image: url("../images/site/checkerboard.jpg");
+   background-size: 60%
+}
+
+.content {
+   border: 3px solid #4c96d7;
+   border-radius: 5px;
+   margin-left: 6%;
+   margin-right: 6%;
+   background-color: white;
+   font-family: serif;
+}
+hr {
+   border-top: 5px solid gray;
+}
+nav a:hover {
+   background-color: #4c96d7;
+   padding: 11px;
+}
+.active {
+   background-color: #4c96d7;
+   padding: 11px;
+   color: black
+}
+
+#logo {
+   width: 25%;
+}
+#banner {
+   display: inline;
+}
+#account {
+   float: right;
+   margin: 0;
+   font-size: 70%;
+   color: #202020;
+   padding: 5px;
+   text-align: left;
+}
+#nav ul {
+   background-color: #3a3a3a;
+   list-style-type: none;
+   padding: 10px;
+}
+#nav li {
+   display: inline;
+}
+#nav li a {
+   color: white;
+   text-decoration: none;
+   font-size: 80%;
+   margin-left: 5px;
+   margin-right: 5px;
+}
+#divider {
+   border-top: 5px solid gray;
+}
+
+footer {
+   font-size: 75%;
+   text-align: center;
+   margin: auto;
+}
+
+#deloreanUpgrades a {
+   display: flex;
+   
+}
