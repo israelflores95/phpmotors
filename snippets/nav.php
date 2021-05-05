@@ -11,4 +11,4 @@
       <li><a href="#">Trucks</a></li>
       <li><a href="#">Used</a></li>
     </ul>
-  </nav>
+  </nav> 

@@ -1,6 +1,6 @@
 body {
    background-image: url("../images/site/checkerboard.jpg");
-   background-size: 60%
+   background-size: 45%
 }
 
 .content {
@@ -57,13 +57,53 @@ nav a:hover {
    border-top: 5px solid gray;
 }
 
+#carImg {
+   width: 60%;
+}
+
+#dmcDelorean {
+   padding-left: 30px;
+   color: #4c96d7;
+}
+
+#dmcDelorean h3 { 
+   margin: 0px;
+}
+#dmcDelorean button {
+   background-color: #4c96d7;
+   color: #202020;
+   border: 1px solid ;
+   padding: 15px;
+
+}
 footer {
    font-size: 75%;
    text-align: center;
    margin: auto;
 }
 
-#deloreanUpgrades a {
+#doubleFlex {
    display: flex;
-   
+   width: 100%;
+   justify-content: space-evenly;
+}
+
+#upgrades img {
+   background-color: #4c96d7;
+   width: 25%;
+   padding: 5px;
+   padding-left: 60px;
+   padding-right: 60px;
+}
+#upgrades section{
+   display: flex;
+   justify-content: space-evenly;
+}
+
+#upgrades section div {
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   justify-content: space-evenly;
+   text-align: center;
 }

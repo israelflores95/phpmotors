@@ -12,23 +12,46 @@
         <div>
             <h1>Welcome to PHP Motors!</h1>
 
+        <section id="dmcDelorean">
             <p>
-            <h2>DMC Delorean</h2>
+            <h3>DMC Delorean</h3>
             3 Cup holders<br>
             superman doors<br>
             Fuzzy dice!<br>
             </p>
-
             <button id="ownTodayBtn">Own Today!</button>
+        </section>
+
             <img id="carImg" src="phpmotors/images/delorean.jpg" alt="delorean car">
 
-            <section>
-                <div id="deloreanUpgrades">
-                    <h4>Delorean Upgrades</h4>
+            <section id="doubleFlex">
+           
+                <div id="upgrades">
+                <h4>Delorean Upgrades</h4>
+
+                <section>
+                <div>
+                    <img src="phpmotors/images/upgrades/flux-cap.png" alt="flux Capacitor">
                     <a href="#">Flux Capacitor</a>
+                </div>
+
+                <div>
+                    <img src="phpmotors/images/upgrades/flame.jpg">
                     <a href="#">Flame Decals</a>
+                </div>
+                </section>
+
+                <section>
+                <div>
+                    <img src="phpmotors/images/upgrades/bumper_sticker.jpg">
                     <a href="#">Bumper Stickers</a>
+                </div>
+
+                <div>
+                    <img src="phpmotors/images/upgrades/hub-cap.jpg">
                     <a href="#">Hub Caps</a>
+                </div>
+                </section>
                 </div>
 
                 <div>
