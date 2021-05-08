@@ -11,8 +11,16 @@ body {
    background-color: white;
    font-family: serif;
 }
+
+#serverError {
+   padding-left: 10px;   
+}
+#serverError h1, p{
+   margin: 0;
+}
+
 hr {
-   border-top: 5px solid gray;
+   border-top: 3px solid gray;
 }
 nav a:hover {
    background-color: #4c96d7;

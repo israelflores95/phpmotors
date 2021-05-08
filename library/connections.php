@@ -4,7 +4,7 @@
 */
 
 $server = 'mysql';
-$dbname = 'phpmotos';
+$dbname = 'phpmotorss';
 $username = 'proxy';
 $password = '/sqjR@c]fc7hz3kZ';
 $dsn = "mysql:host=$server;dbname=$dbname";
@@ -17,6 +17,6 @@ try {
         echo 'it worked!';
     };
 } catch(PDOException $e) {
-   header('Location: phpmotors/view/500.php');
+   header('Location: /phpmotors/phpmotors/view/500.php');
 };
 ?>

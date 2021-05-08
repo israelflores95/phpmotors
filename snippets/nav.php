@@ -1,6 +1,6 @@
 <nav id="nav">
       <section id="banner">
-      <img id = "logo" src="phpmotors/images/site/logo.png" alt="PHP motors logo">
+      <img id = "logo" src="/phpmotors/phpmotors/images/site/logo.png" alt="PHP motors logo">
       <h3 id="account">My Account</h3>
       </section>
     <ul id="mainNav">

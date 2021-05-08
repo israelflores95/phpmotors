@@ -2,4 +2,4 @@
 
 <title>PHP motors | Home</title>
 
-<link rel="stylesheet" type="text/css" href="phpmotors/css/styles.css" media="screen"/>
+<link rel="stylesheet" type="text/css" href="/phpmotors/phpmotors/css/styles.css" media="screen"/>
