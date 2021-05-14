@@ -1,28 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-    <link rel="stylesheet" type="text/css" href="phpmotors/css/styles.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/phpmotors/css/styles.css" media="screen"/>
+
+    <title>PHPMotors | Home</title>
 
     </head>
 
     <body>
         <section class="content">
+        <div id="banner">
+            <img id = "logo" src="/phpmotors/images/site/logo.png" alt="PHP motors logo">
+            <button>My Account</button>
+        </div>
+
         <!--php snippet for nav -->
-        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/nav.php'; ?>
+        <nav id="nav">
+        <!-- <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/nav.php'; ?> -->
+        <?php echo $navList; ?>
+        </nav>
+
+
         <div>
             <h1>Welcome to PHP Motors!</h1>
 
         <section id="dmcDelorean">
-            <p>
+            
             <h3>DMC Delorean</h3>
             3 Cup holders<br>
             superman doors<br>
             Fuzzy dice!<br>
-            </p>
+        
             <button id="ownTodayBtn">Own Today!</button>
         </section>
 
-            <img id="carImg" src="phpmotors/images/delorean.jpg" alt="delorean car">
+            <img id="carImg" src="/phpmotors/images/delorean.jpg" alt="delorean car">
 
             <section id="doubleFlex">
            
@@ -31,24 +43,24 @@
 
                 <section>
                 <div>
-                    <img src="phpmotors/images/upgrades/flux-cap.png" alt="flux Capacitor">
+                    <img src="/phpmotors/images/upgrades/flux-cap.png" alt="flux Capacitor">
                     <a href="#">Flux Capacitor</a>
                 </div>
 
                 <div>
-                    <img src="phpmotors/images/upgrades/flame.jpg">
+                    <img src="/phpmotors/images/upgrades/flame.jpg" alt="Flames">
                     <a href="#">Flame Decals</a>
                 </div>
                 </section>
 
                 <section>
                 <div>
-                    <img src="phpmotors/images/upgrades/bumper_sticker.jpg">
+                    <img src="/phpmotors/images/upgrades/bumper_sticker.jpg" alt="Hello world bumbper sticker">
                     <a href="#">Bumper Stickers</a>
                 </div>
 
                 <div>
-                    <img src="phpmotors/images/upgrades/hub-cap.jpg">
+                    <img src="/phpmotors/images/upgrades/hub-cap.jpg" alt="hubcap">
                     <a href="#">Hub Caps</a>
                 </div>
                 </section>

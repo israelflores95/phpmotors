@@ -1,5 +1,5 @@
 body {
-   background-image: url("../images/site/checkerboard.jpg");
+   background-image: url("/phpmotors/images/site/checkerboard.jpg");
    background-size: 45%
 }
 
@@ -22,45 +22,49 @@ body {
 hr {
    border-top: 3px solid gray;
 }
-nav a:hover {
-   background-color: #4c96d7;
-   padding: 11px;
-}
+
 .active {
    background-color: #4c96d7;
    padding: 11px;
    color: black
 }
 
+#banner {
+   display: flex;
+   justify-content: space-between;
+}
+
+#banner button {
+   padding: 15px;
+   font-size: .8em;
+   color: #524d4d;
+   border: none;
+   background-color: white;
+}
+
 #logo {
    width: 25%;
 }
-#banner {
-   display: inline;
-}
-#account {
-   float: right;
-   margin: 0;
-   font-size: 70%;
-   color: #202020;
-   padding: 5px;
-   text-align: left;
-}
-#nav ul {
+
+#nav {
+   display: flex;
+   justify-content: left;
    background-color: #3a3a3a;
-   list-style-type: none;
    padding: 10px;
 }
-#nav li {
-   display: inline;
-}
-#nav li a {
+
+#nav a { 
    color: white;
+   padding: 10px;
    text-decoration: none;
-   font-size: 80%;
-   margin-left: 5px;
-   margin-right: 5px;
+   font-family: 'Times New Roman', Times, serif;
 }
+
+#nav a:hover {
+   background-color: #4c96d7;
+   padding: 15px;
+}
+
 #divider {
    border-top: 5px solid gray;
 }
@@ -71,7 +75,7 @@ nav a:hover {
 
 #dmcDelorean {
    padding-left: 30px;
-   color: #4c96d7;
+   color: #276ca8;
 }
 
 #dmcDelorean h3 { 
