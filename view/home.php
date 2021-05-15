@@ -9,14 +9,11 @@
 
     <body>
         <section class="content">
-        <div id="banner">
-            <img id = "logo" src="/phpmotors/images/site/logo.png" alt="PHP motors logo">
-            <button>My Account</button>
-        </div>
+
+        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/banner.php'; ?>
 
         <!--php snippet for nav -->
         <nav id="nav">
-        <!-- <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/nav.php'; ?> -->
         <?php echo $navList; ?>
         </nav>
 

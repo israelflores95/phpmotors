@@ -28,12 +28,16 @@ $action = filter_input(INPUT_POST, 'action');
  }
 
  switch ($action) {
-  case '':
- 
-  break;
-  default:
- 
-  break;
- }
+    case '../view/login.php':
+        include '../view/login.php';
+    break;
+
+    case '../view/register.php';
+        include '../view/register.php';
+    break;
+
+    default:
+        include '../view/login.php';
+ };
 
  ?>
