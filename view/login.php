@@ -30,7 +30,7 @@
       <input id="login" type="submit" value="Login">
   </form>
 
-  <a href="../view/Register.php">Not a member yet?</a>
+  <a href="/phpmotors/accounts/index.php?action=register">Not a member yet?</a>
 
 </div>
 

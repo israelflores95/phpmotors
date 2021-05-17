@@ -27,17 +27,19 @@ $action = filter_input(INPUT_POST, 'action');
   $action = filter_input(INPUT_GET, 'action');
  }
 
+
+
  switch ($action) {
-    case '../view/login.php':
+    case 'myaccount';
         include '../view/login.php';
     break;
 
-    case '../view/register.php';
+    case 'register':
         include '../view/register.php';
     break;
 
     default:
-        include '../view/login.php';
+        include '../view/template.php';
  };
 
  ?>
