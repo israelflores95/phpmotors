@@ -20,13 +20,21 @@
 
 <div id="regForm">
   <h2>Register</h2>
-  <form>
+
+  <?php
+  if (isset($message)) {
+  echo $message;
+  }
+  ?>
+
+  <form method="POST" action="/phpmotors/accounts/index.php">
   
+  <!-- Start information gathering -->
   <label for="clientFirstname">First Name</label>
   <input name="clientFirstname" id="clientFirstname" type="text" required>
 
-  <label for="clientLastName">Last Name</label>
-  <input name="clientLastName" id="clientLastName" type="text" required>
+  <label for="clientLastname">Last Name</label>
+  <input name="clientLastname" id="clientLastname" type="text" required>
   
   <label for="clientEmail">Email</label>
   <input name="clientEmail" id="clientEmail" type="email" required>
@@ -35,8 +43,10 @@
   <label for="clientPassword">Password</label>
   <input name="clientPassword" id="clientPassword" type="password" required>
 
-
+  <!-- Sign up button and end of client info -->
   <input id="signUp" name="register" type ="submit" value="Sign up">
+  <!-- Add the action name - value pair -->
+  <input type="hidden" name="action" value="signUp">
   </form>
 
   <button id = "showPass" onclick="showPass()">Show Password</button>

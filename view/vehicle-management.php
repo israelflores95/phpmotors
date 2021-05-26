@@ -3,7 +3,7 @@
 <head>
 
   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/head.php'; ?>
-  <title>PHP motors | Templates</title>
+  <title>PHP motors | Vehicle Management</title>
 
 </head>
 
@@ -17,8 +17,13 @@
   <?php echo $navList; ?>
   </nav>
 
-<!-- Content starts here -->
-  <section></section>
+<section>
+    <h2>Vehicle Management</h2>
+        <ul>
+            <li><a href = '/phpmotors/vehicles/index.php?action=addClassification'>Add Classification</a></li>
+            <li><a href = '/phpmotors/vehicles/index.php?action=addVehicle'>Add Vehicle</a></li>
+        </ul>
+</section>
 
 
   <!-- footer php snippet -->

@@ -3,6 +3,10 @@ body {
    background-size: 45%
 }
 
+h1, h2 {
+   padding-left: 15px;
+}
+
 .content {
    border: 3px solid #4c96d7;
    border-radius: 5px;
@@ -174,4 +178,31 @@ footer {
    background-color: #4c96d7;
    color: black;
    padding: 5px;
+}
+
+/* Start of Vehicles -> Add vehicle----- */
+
+.addVehicle {
+   display: flex;
+   flex-direction: column;
+   max-width: 20%;
+   padding-left: 15px;
+}
+
+#addVehicle {
+   background-color: #4c96d7;
+   margin-top: .7em;
+}
+/* ------------------------------------- */
+/* ------Start add classification------- */
+
+.addClassification {
+   display: flex;
+   flex-direction: column;
+   max-width: 20%;
+   padding-left: 15px;
+}
+#addClassification {
+   margin-top: .7em;
+   background-color: #4c96d7;
 }

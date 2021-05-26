@@ -20,7 +20,13 @@
 <div id="formContainer">
 <h2>Sign in</h2>
 
-  <form>
+  <?php
+    if (isset($message)) {
+    echo $message;
+    }
+  ?>
+
+  <form action="/phpmotors/accounts/index.php" method="POST">
       <label for="clientEmail">Email</label>
       <input name="clientEmail" id="clientEmail" type="email">
 
