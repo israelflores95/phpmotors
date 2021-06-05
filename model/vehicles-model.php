@@ -48,9 +48,9 @@ function getClassificationList(){
     $stmt->bindValue(':invImage', $invImage, PDO::PARAM_STR);
     $stmt->bindValue(':invThumbnail', $invThumbnail, PDO::PARAM_STR);
     $stmt->bindValue(':invPrice', $invPrice, PDO::PARAM_STR);
-    $stmt->bindValue(':invStock', $invStock, PDO::PARAM_STR);
+    $stmt->bindValue(':invStock', $invStock, PDO::PARAM_INT);
     $stmt->bindValue(':invColor', $invColor, PDO::PARAM_STR);
-    $stmt->bindValue(':classificationId', $classificationId, PDO::PARAM_STR);
+    $stmt->bindValue(':classificationId', $classificationId, PDO::PARAM_INT);
     // Insert the data
 
     $stmt->execute();

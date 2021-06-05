@@ -3,7 +3,7 @@ body {
    background-size: 45%
 }
 
-h1, h2 {
+h1, h2, h4 {
    padding-left: 15px;
 }
 
@@ -123,6 +123,9 @@ footer {
    justify-content: space-evenly;
    text-align: center;
 }
+p {
+   padding-left: 15px;
+}
 
 /* -------Login | forms flex -----------*/
 #formContainer {
@@ -193,7 +196,15 @@ footer {
    background-color: #4c96d7;
    margin-top: .7em;
 }
+
+option:disabled {
+   color: red;
+}
+
 /* ------------------------------------- */
+.server-valadation {
+   color: red;
+}
 /* ------Start add classification------- */
 
 .addClassification {
@@ -206,3 +217,9 @@ footer {
    margin-top: .7em;
    background-color: #4c96d7;
 }
+
+
+.password-error {
+   color: red;
+}
+

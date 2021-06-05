@@ -1,4 +1,17 @@
-<!doctype html>
+<?php
+// Build dynamic classification dropdown list
+$classList = '';
+foreach ($classificationid as $classification) {
+$classList .= "<option value='$classification[classificationId]'";
+if(isset($classificationId)){
+  if($classification['classificationId'] === $classificationId) {
+    $classList .= 'selected' ;
+  }
+}
+ $classList .= ">$classification[classificationName]</option>";
+}
+
+?><!doctype html>
 <html lang="en">
 <head>
 
@@ -32,33 +45,33 @@
 
     <label for="classificationId" hidden>selectBox</label>
     <select id="classificationId" name="classificationId" required>
-      <option disabled selected value>--Choose car classification--</option>
+      <option id="blank-option" disabled selected value>--Choose car classification--</option>
       <?php echo $classList; ?>
     </select>
     
     <Label for="invMake">Make*</Label>
-    <input type="text" id="invMake" name="invMake" required>
+    <input type="text" id="invMake" name="invMake" <?php if(isset($invMake)){echo "value='$invMake'";}  ?> required>
 
     <Label for="invModel">Model*</Label>
-    <input type="text" id="invModel" name="invModel" required>
+    <input type="text" id="invModel" name="invModel" <?php if(isset($invModel)){echo "value='$invModel'";}  ?> required>
 
     <Label for="invDescription">Description</Label>
-    <textarea id="invDescription" name="invDescription"></textarea>
+    <textarea id="invDescription" name="invDescription"  required><?php if(isset($invDescription)){echo $invDescription;}  ?></textarea>
 
     <Label for="invImage">invImage*</Label>
-    <input type="text" id="invImage" name="invImage" required>
+    <input type="text" id="invImage" name="invImage" <?php if(isset($invImage)){echo "value='$invImage'";}  ?> required>
 
     <Label for="invThumbnail">Thumbnail Path*</Label>
-    <input type="text" id="invThumbnail" name="invThumbnail" required>
+    <input type="text" id="invThumbnail" name="invThumbnail" <?php if(isset($invThumbnail)){echo "value='$invThumbnail'";}  ?> required>
 
     <Label for="invPrice">Price*</Label>
-    <input type="text" id="invPrice" name="invPrice" required>
+    <input type="number" step="any" id="invPrice" name="invPrice" min="0" max="1000000" <?php if(isset($invPrice)){echo "value='$invPrice'";}  ?> required>
 
     <Label for="invStock">Stock*</Label>
-    <input type="text" id="invStock" name="invStock" required>
+    <input type="number" id="invStock" name="invStock" min="0" max="10000" <?php if(isset($invStock)){echo "value='$invStock'";}  ?> required>
 
     <Label for="invColor">color*</Label>
-    <input type="text" id="invColor" name="invColor" >
+    <input type="text" id="invColor" name="invColor" maxlength="20" <?php if(isset($invColor)){echo "value='$invColor'";}  ?> required>
 
     <input id="addVehicle" type="submit" value="Add Vehicle">
     <input type="hidden" name="action" value="add-vehicle">

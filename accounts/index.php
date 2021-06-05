@@ -8,6 +8,8 @@
  require_once '../model/main-model.php';
  //add accounts model
  require_once '../model/accounts-model.php';
+ // Get the functions library
+ require_once '../library/functions.php';
 
 // Get the array of classifications
 $classifications = getClassifications();
@@ -32,7 +34,7 @@ $action = filter_input(INPUT_POST, 'action');
 
 
  switch ($action) {
-    case 'myaccount';
+    case 'myaccount':
         include '../view/login.php';
     break;
 
@@ -40,26 +42,50 @@ $action = filter_input(INPUT_POST, 'action');
         include '../view/register.php';
     break;
 
+    case 'Login':
+        // get client email and password
+        $clientEmail = TRIM(filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL));
+        $clientPassword = TRIM(filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING));
+
+        //server side valadation
+        $clientEmail = checkEmail($clientEmail);
+        $checkPassword = checkPassword($clientPassword);
+
+        //check for missing data
+        if(empty($clientEmail) || empty($checkPassword)){
+            $message = '<p class = password-error>Please provide information for all empty fields.</p>';
+            include '../view/login.php';
+            exit; 
+        }
+
+        
+        //include '../index.php';
+
+        break;
+
     case 'signUp':
         // Filter and store the data
-        $clientFirstname = filter_input(INPUT_POST, 'clientFirstname');
-        $clientLastname = filter_input(INPUT_POST, 'clientLastname');
-        $clientEmail = filter_input(INPUT_POST, 'clientEmail');
-        $clientPassword = filter_input(INPUT_POST, 'clientPassword');
+        $clientFirstname = TRIM(filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING));
+        $clientLastname = TRIM(filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING));
+        $clientEmail = TRIM(filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL));
+        $clientPassword = TRIM(filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING));
 
+        //call the checkEmail function (more email valadation)
+        $clientEmail = checkEmail($clientEmail);
+        $checkPassword = checkPassword($clientPassword);
 
         // Check for missing data
-        if(empty($clientFirstname) || empty($clientLastname) || empty($clientEmail) || empty($clientPassword)){
-            $message = '<p>Please provide information for all empty form fields.</p>';
+        if(empty($clientFirstname) || empty($clientLastname) || empty($clientEmail) || empty($checkPassword)){
+            $message = '<p class = password-error>Please provide information for all empty form fields.</p>';
             include '../view/Register.php';
             exit; 
         }
 
-        // var_dump($clientEmail);
-        // exit;
+        // Hash the checked password
+        $hashedPassword = password_hash($clientPassword, PASSWORD_DEFAULT);
 
         // Send the data to the model
-        $regOutcome = regClient($clientFirstname, $clientLastname, $clientEmail, $clientPassword);
+        $regOutcome = regClient($clientFirstname, $clientLastname, $clientEmail, $hashedPassword);
 
         // Check and report the result
 
