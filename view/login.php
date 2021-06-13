@@ -20,13 +20,14 @@
 <div id="formContainer">
 <h2>Sign in</h2>
 
+<!-- Show successful login message -->
   <?php
-    if (isset($message)) {
-    echo $message;
-    }
+  if (isset($_SESSION['message'])) {
+    echo $_SESSION['message'];
+   }
   ?>
 
-  <form action="/phpmotors/accounts/index.php" method="POST">
+  <form action="/phpmotors/accounts/" method="POST">
       <label for="clientEmail">Email</label>
       <input name="clientEmail" id="clientEmail" type="email" <?php if(isset($clientEmail)){echo "value='$clientEmail'";}  ?> required>
 

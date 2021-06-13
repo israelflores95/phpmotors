@@ -38,6 +38,12 @@ hr {
    justify-content: space-between;
 }
 
+#cookie-name {
+   text-align: center;
+   margin: auto;
+   font-family: 'Times New Roman', Times, serif;
+}
+
 #banner a {
    padding: 15px;
    font-size: .8em;

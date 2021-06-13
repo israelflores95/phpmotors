@@ -1,8 +1,13 @@
 <?php
+// Create or access a Session
+session_start();
+
 // Get the database connection file
  require_once 'library/connections.php';
- // Get the PHP Motors model for use as needed
+// Get the PHP Motors model for use as needed
  require_once 'model/main-model.php';
+// get accounts model
+ require_once 'model/accounts-model.php';
 
 // Get the array of classifications
 $classifications = getClassifications();
@@ -26,6 +31,9 @@ $action = filter_input(INPUT_POST, 'action');
   $action = filter_input(INPUT_GET, 'action');
  }
 
+ // Check if the firstname cookie exists, get its value
+
+
  switch ($action){
     case 'template':
       include 'view/template.php';
@@ -33,6 +41,10 @@ $action = filter_input(INPUT_POST, 'action');
     
     case 'login':
       include 'view/login.php';
+    break;
+    
+    case 'home':
+      include 'view/home.php';
     break;
     
     default:

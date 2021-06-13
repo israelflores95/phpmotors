@@ -1,4 +1,8 @@
-<!doctype html>
+<?php
+    if ($_SESSION['clientLevel'] <= 1 && $_SESSION['loggedin']) {
+        header('Location: ../index.php');
+    }
+  ?><!doctype html>
 <html lang="en">
 <head>
 

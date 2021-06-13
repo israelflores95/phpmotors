@@ -1,4 +1,8 @@
 <?php
+    if ($_SESSION['clientLevel'] <= 1 && $_SESSION['loggedin']) {
+        header('Location: ../index.php');
+    }
+  ?><?php
 // Build dynamic classification dropdown list
 $classList = '';
 foreach ($classificationid as $classification) {

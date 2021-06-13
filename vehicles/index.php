@@ -1,4 +1,6 @@
 <?php
+// Create or access a Session
+session_start();
 
 /*
 * Vehicles controller 
@@ -70,7 +72,8 @@ $action = filter_input(INPUT_POST, 'action');
     // check for empty fields and report message
     if(empty($invMake) || empty($invModel) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invColor) || empty($classificationId)){
         $message = '<p class = "server-valadation">Please provide information for all empty form fields.</p>';
-        include '../view/add-vehicle.php';
+        // include '../view/add-vehicle.php';
+        header('Location: /phpmotors/view/add-vehicle.php');
         exit;
     }
 
@@ -83,7 +86,7 @@ $action = filter_input(INPUT_POST, 'action');
         exit;
     } else {
         $message = "<p>Adding vehicle failed! please try again.</p>";
-        include '../view/add-vehicle.php';
+        header('Location: /phpmotors/view/add-vehicle.php');
         exit;
     }
     break;
@@ -98,14 +101,15 @@ $action = filter_input(INPUT_POST, 'action');
     // check for empty fields and report message
     if(empty($classificationName)){
         $message = '<p class = "server-valadation">*Please provide information for the empty field.</p>';
-        include '../view/add-classification.php';
+        header('Location: /phpmotors/vehicles/index.php');
         exit;
     }
 
     // send data to model
     $addClassificationOutcome = addClassification ($classificationName);
 
-        include '../view/vehicle-management.php';
+        // include '../view/vehicle-management.php';
+        header('Location: /phpmotors/vehicles/index.php');
     break;
 
     default:

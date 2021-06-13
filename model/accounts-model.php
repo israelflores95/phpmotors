@@ -4,7 +4,7 @@
 
 
 
-//function to handl site registrations
+//function to handel site registrations
 
 function regClient($clientFirstname, $clientLastname, $clientEmail, $clientPassword){
     // Create a connection object using the phpmotors connection function
@@ -29,5 +29,37 @@ function regClient($clientFirstname, $clientLastname, $clientEmail, $clientPassw
     $stmt->closeCursor();
     // Return the indication of success (rows changed)
     return $rowsChanged;
+   }
+
+//    Check duplicate email function
+function checkExistingEmail($clientEmail) { // start of check duplicate email function taking in the client email as a perameter
+    $db =  phpmotorsConnect(); // establish connection to database
+    $sql = 'SELECT clientEmail FROM clients WHERE clientEmail = :email'; // SQL query
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':email', $clientEmail, PDO::PARAM_STR); // bind the database email to a variable
+    $stmt->execute(); // send to database
+    $matchEmail = $stmt->fetch(PDO::FETCH_NUM); 
+    $stmt->closeCursor();
+
+    if(empty($matchEmail)){ // check if the email already exists
+     return 0;
+    // echo 'no match continue registering';
+    } else {
+     return 1;
+    // echo "Match found, please sign in.";
+    }
+
+   }
+
+// Get client data based on an email address
+function getClient($clientEmail){
+    $db = phpmotorsConnect();
+    $sql = 'SELECT clientId, clientFirstname, clientLastname, clientEmail, clientLevel, clientPassword FROM clients WHERE clientEmail = :clientEmail';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':clientEmail', $clientEmail, PDO::PARAM_STR);
+    $stmt->execute();
+    $clientData = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $clientData;
    }
 ?>
