@@ -29,7 +29,7 @@ if(!$_SESSION['loggedin']) {
 
   <!-- Check client level -->
   <?php
-    if ($clientData['clientLevel'] > 1) {
+    if ($_SESSION['clientData']['clientLevel'] > 1) {
       
       echo "<p>Click <a href = '/phpmotors/vehicles/'>here</a> to continue";
     }

@@ -1,5 +1,5 @@
 <?php
-    if ($_SESSION['clientLevel'] <= 1 && $_SESSION['loggedin']) {
+    if ($_SESSION['clientLevel'] < 2 && !$_SESSION['loggedin']) {
         header('Location: ../index.php');
     }
   ?><!doctype html>

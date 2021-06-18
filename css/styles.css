@@ -229,3 +229,7 @@ option:disabled {
    color: red;
 }
 
+/* Vehicle management */
+#classificationList, #inventoryDisplay{
+   margin-left: 15px;
+}
