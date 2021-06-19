@@ -132,6 +132,46 @@ $action = filter_input(INPUT_POST, 'action');
         include '../view/vehicle-update.php';
     break;
 
+    case 'updateVehicle':
+        // get info from html form and into php variables
+    $invMake = TRIM(filter_input(INPUT_POST, 'invMake', FILTER_SANITIZE_STRING));
+    $invModel = TRIM(filter_input(INPUT_POST, 'invModel', FILTER_SANITIZE_STRING));
+    $invDescription = TRIM(filter_input(INPUT_POST, 'invDescription', FILTER_SANITIZE_STRING));
+    $invImage = TRIM(filter_input(INPUT_POST, 'invImage', FILTER_SANITIZE_STRING));
+    $invThumbnail = TRIM(filter_input(INPUT_POST, 'invThumbnail', FILTER_SANITIZE_STRING));
+    $invPrice = TRIM(filter_input(INPUT_POST, 'invPrice', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION));
+    $invStock = TRIM(filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_NUMBER_FLOAT));
+    $invColor = TRIM(filter_input(INPUT_POST, 'invColor', FILTER_SANITIZE_STRING));
+    $classificationId = TRIM(filter_input(INPUT_POST, 'classificationId', FILTER_SANITIZE_NUMBER_INT));
+
+    $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
+
+//    var_dump($invImage);
+//    exit;
+
+    // check for empty fields and report message
+    if(empty($invMake) || empty($invModel) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invColor) || empty($classificationId)){
+        $message = '<p class = "server-valadation">Please provide information for all empty form fields.</p>';
+        // include '../view/add-vehicle.php';
+        header('Location: /phpmotors/view/vehicle-update.php');
+        exit;
+    }
+
+    // send data to model
+    $updateResult = updateVehicle($invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationId, $invId);
+    
+    if($updateResult){
+        $message = "<p>Vehicle updated</p>";
+        $_SESSION['message'] = $message;
+        header( 'location: /phpmotors/vehicles/');
+        exit;
+    } else {
+        $message = "<p>Update vehicle failed! please try again.</p>";
+        header('Location: /phpmotors/view/vehicle-update.php');
+        exit;
+    }
+    break;
+
     default:
     $classificationList = buildClassificationList($classifications);
         include '../view/vehicle-management.php';
