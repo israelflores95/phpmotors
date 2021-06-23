@@ -230,6 +230,15 @@ option:disabled {
 }
 
 /* Vehicle management */
-#classificationList, #inventoryDisplay{
+#classificationList, #inventoryDisplay, #account-info a {
    margin-left: 15px;
+}
+
+/* updateAccount view */
+.updateClient-info, .updateClient-password {
+   display: flex;
+   flex-direction: column;
+   max-width: 20%;
+   padding-left: 15px;
+   padding-top: 15px;
 }

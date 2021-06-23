@@ -18,7 +18,12 @@
   </nav>
 
 <!-- Content starts here -->
-  <section></section>
+  <section>
+    <form>
+      <label>First Name</label>
+    </form>
+
+  </section>
 
 
   <!-- footer php snippet -->

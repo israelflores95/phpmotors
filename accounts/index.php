@@ -44,7 +44,13 @@ $action = filter_input(INPUT_POST, 'action');
         include '../view/register.php';
     break;
 
+    case 'updateAccount':
+        include '../view/client-update.php';
+        exit;
+    break;
+
     case 'Login':
+        
         // get client email and password
         $clientEmail = TRIM(filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL));
         $clientPassword = TRIM(filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING));
@@ -74,6 +80,7 @@ $action = filter_input(INPUT_POST, 'action');
         include '../view/login.php';
         exit;
         }
+
         // A valid user exists, log them in
         $_SESSION['loggedin'] = TRUE;
         // Remove the password from the array
@@ -91,7 +98,7 @@ $action = filter_input(INPUT_POST, 'action');
         $_SESSION['bannerName'] = "<h1 id = 'banner-name'><a href = '/phpmotors/accounts/index.php?action=admin' >Welcome " . $clientData['clientFirstname'] . "</a></h1>";
 
         // display client full name in H1 Tag
-        $_SESSION['clientName'] = "<h1 id = 'client-fullName'>" . $clientData['clientFirstname'] . " " . $clientData['clientLastname'] . "</h1>";
+        $_SESSION['clientName'] = "<h1 id = 'client-fullName'>" . "Logged in as: " . $clientData['clientFirstname'] . " " . $clientData['clientLastname'] . "</h1>";
 
         // display client data in UL tag
         $_SESSION['clientLogin'] = "<ul id = 'client-data'>"
@@ -102,7 +109,7 @@ $action = filter_input(INPUT_POST, 'action');
         include '../view/admin.php';
         exit;
 
-        break;
+    break;
 
     case 'signUp':
         // Filter and store the data
@@ -157,6 +164,17 @@ $action = filter_input(INPUT_POST, 'action');
         session_unset();
         session_destroy();
         header('Location: /phpmotors');
+    break;
+
+    case 'account-mod':
+        $clientId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        $clientInfo = getclientInfo($clientId);
+
+        if(count($invInfo)<1){
+            $message = 'no account info found';
+           }
+        
+        include '../view/client-update.php';
     break;
 
     default:

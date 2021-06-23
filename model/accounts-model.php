@@ -2,8 +2,6 @@
 
 //Accounts Model
 
-
-
 //function to handel site registrations
 
 function regClient($clientFirstname, $clientLastname, $clientEmail, $clientPassword){
@@ -29,7 +27,7 @@ function regClient($clientFirstname, $clientLastname, $clientEmail, $clientPassw
     $stmt->closeCursor();
     // Return the indication of success (rows changed)
     return $rowsChanged;
-   }
+}
 
 //    Check duplicate email function
 function checkExistingEmail($clientEmail) { // start of check duplicate email function taking in the client email as a perameter
@@ -49,7 +47,7 @@ function checkExistingEmail($clientEmail) { // start of check duplicate email fu
     // echo "Match found, please sign in.";
     }
 
-   }
+}
 
 // Get client data based on an email address
 function getClient($clientEmail){
@@ -61,5 +59,17 @@ function getClient($clientEmail){
     $clientData = $stmt->fetch(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
     return $clientData;
+}
+
+// Get vehicle information by invId
+function getclientInfo($clientId){
+    $db = phpmotorsConnect();
+    $sql = 'SELECT * FROM clients WHERE clientId = :clientId';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':clientId', $clientId, PDO::PARAM_INT);
+    $stmt->execute();
+    $clientInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $clientInfo;
    }
 ?>
