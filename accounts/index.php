@@ -44,7 +44,7 @@ $action = filter_input(INPUT_POST, 'action');
         include '../view/register.php';
     break;
 
-    case 'updateAccount':
+    case 'updateAccount': // from admin.php view
         include '../view/client-update.php';
         exit;
     break;
@@ -166,14 +166,24 @@ $action = filter_input(INPUT_POST, 'action');
         header('Location: /phpmotors');
     break;
 
-    case 'account-mod':
-        $clientId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-        $clientInfo = getclientInfo($clientId);
+    case 'update-account':
 
-        if(count($invInfo)<1){
-            $message = 'no account info found';
-           }
+        $clientFirstname = trim(filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING));
+        $clientLastname = trim(filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING));
+        $clientEmail = trim(filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL));
+        $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT);
         
+        // Check for missing data
+        if(empty($clientFirstname) || empty($clientLastname) || empty($clientEmail)){
+            $accountMessage = '<p class="error-notice">Please provide information for all empty form fields.</p>';
+            include '../view/client-update.php';
+            exit; 
+        }
+
+        if ($clientEmail == $_SESSION['clientData']['clientEmail']) {
+            $accountMessage = '<p>This is the same email.</p>';
+        }
+
         include '../view/client-update.php';
     break;
 

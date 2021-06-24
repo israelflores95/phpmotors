@@ -39,7 +39,7 @@
       <input type="text" id="invMake" name="invMake" readonly <?php if(isset($invMake)){echo "value='$invMake'";} elseif(isset($invInfo['invMake'])) {echo "value='$invInfo[invMake]'"; } ?> >
 
     <Label for="invModel">Model*</Label>
-      <input type="text" id="invModel" name="invModel" readonly <?php if(isset($invModel)){echo "value='$invModel'";} ?>>
+      <input type="text" id="invModel" name="invModel" readonly <?php if(isset($invModel)){echo "value='$invModel'";} elseif(isset($invInfo['invModel'])) {echo "value='$invInfo[invModel]'"; } ?>>
 
     <Label for="invDescription">Description</Label>
       <textarea id="invDescription" name="invDescription" readonly ><?php if(isset($invDescription)){echo $invDescription;} elseif(isset($invInfo['invDescription'])) {echo $invInfo['invDescription']; } ?></textarea>

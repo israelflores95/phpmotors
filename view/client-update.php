@@ -30,42 +30,51 @@ if(!$_SESSION['loggedin']) {
 
   <!-- Display php error if needed -->
   <?php
-    if (isset($message)) {
-    echo $message;
+    if (isset($accountMessage)) {
+    echo $accountMessage;
     }
   ?>
 
   <!-- client update form -->
-    <form class="updateClient-info">
-      <label for="clientFirstname">First Name</label>
-      <input name="clientFirstname" id="clientFirstname" type="text" required <?php if (isset($_SESSION['clientData']['clientFirstname'])) { echo "value=" . $_SESSION['clientData']['clientFirstname'];} ?>>
+    <form class="updateClient-info" method="POST" action="/phpmotors/accounts/index.php">
 
-      <label for="clientLastname">Last Name</label>
-      <input name="clientLastname" id="clientLastname" type="text" required <?php if (isset($_SESSION['clientData']['clientLastname'])) { echo "value=" . $_SESSION['clientData']['clientLastname'];} ?>>
+    <label for="clientFirstname">First name</label>
+    <input type="text" id="clientFirstname" name="clientFirstname" <?php if(isset($clientFirstname)){echo "value='$clientFirstname'";} elseif(isset($_SESSION['clientData']['clientFirstname'])) {echo "value='".$_SESSION['clientData']['clientFirstname']."'"; }  ?> required>
+    
 
-      <label for="clientEmail">Email</label>
-      <input name="clientEmail" id="clientEmail" type="email" required <?php if (isset($_SESSION['clientData']['clientEmail'])) { echo "value=" . $_SESSION['clientData']['clientEmail'];} ?>>
+    <label for="clientLastname">Last name</label>
+    <input type="text" id="clientLastname" name="clientLastname" <?php if(isset($clientLastname)){echo "value='$clientLastname'";} elseif(isset($_SESSION['clientData']['clientLastname'])) {echo "value='".$_SESSION['clientData']['clientLastname']."'"; } ?> required>
+    
 
-      <input id="update-account" type="submit" value="Update Account">
-      <input type="hidden" name="action" <?php if (isset($_SESSION['clientData']['clientId'])) { echo "value=" . $_SESSION['clientData']['clientId'];} ?>>
+    <label for="clientEmail">Email</label>
+    <input type="email" id="clientEmail" name="clientEmail" <?php if(isset($clientEmail)){echo "value='$clientEmail'";} elseif(isset($_SESSION['clientData']['clientEmail'])) {echo "value='".$_SESSION['clientData']['clientEmail']."'"; }  ?> required>
+    
+
+    <button type="submit" name="submit" value="Update User">Update Info</button>
+    <!-- Add the action name - value pair -->
+    <input type="hidden" name="action" value="update-account">
+    <input type="hidden" name="clientId" value="<?php if(isset($_SESSION['clientData'])){ echo $_SESSION['clientData']['clientId']; } ?>">
     </form>
 
   <!-- change client password form -->
   <h2>Change password here</h2>
 
   <?php
-    if (isset($message)) {
-    echo $message;
+    if (isset($passMessage)) {
+    echo $passMessage;
     }
   ?>
   
   <span>Passwords must be at least 8 characters and contain at least 1 number, 1 capital letter and 1 special character</span> 
     <form class="updateClient-password">
+
       <label for="clientPassword">Change Password</label>
       <input name="clientPassword" id="clientPassword" type="password" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
 
       <input id="update-password" type="submit" value="Update Password">
-      <input type="hidden" name="action" <?php if (isset($_SESSION['clientData']['clientId'])) { echo "value=" . $_SESSION['clientData']['clientId'];} ?>>
+
+      <input type="hidden" id="action" name="action" value="update-password"> 
+      <input type="hidden" name="clientPassword" <?php if (isset($_SESSION['clientData']['clientId'])) { echo "value=" . $_SESSION['clientData']['clientId'];} ?>>
     </form>
 
   </section>
