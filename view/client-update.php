@@ -64,17 +64,17 @@ if(!$_SESSION['loggedin']) {
     echo $passMessage;
     }
   ?>
-  
-  <span>Passwords must be at least 8 characters and contain at least 1 number, 1 capital letter and 1 special character</span> 
-    <form class="updateClient-password">
+  <br>
+  <p>Passwords must be at least 8 characters and contain at least 1 number, 1 capital letter and 1 special character</p>
+    <form class="updateClient-password" method="POST" action="/phpmotors/accounts/index.php">
 
       <label for="clientPassword">Change Password</label>
-      <input name="clientPassword" id="clientPassword" type="password" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
+      <input name="clientPassword" id="clientPassword" type="password" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required>
 
       <input id="update-password" type="submit" value="Update Password">
 
-      <input type="hidden" id="action" name="action" value="update-password"> 
-      <input type="hidden" name="clientPassword" <?php if (isset($_SESSION['clientData']['clientId'])) { echo "value=" . $_SESSION['clientData']['clientId'];} ?>>
+      <input type="hidden" name="action" value="update-password"> 
+      <input type="hidden" name="clientId" <?php if (isset($_SESSION['clientData']['clientId'])) { echo "value=" . $_SESSION['clientData']['clientId'];} ?>>
     </form>
 
   </section>

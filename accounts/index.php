@@ -95,18 +95,18 @@ $action = filter_input(INPUT_POST, 'action');
         $_SESSION['clientLevel'] = $clientData['clientLevel'];
 
         // store first and last name with html tags to session veriable
-        $_SESSION['bannerName'] = "<h1 id = 'banner-name'><a href = '/phpmotors/accounts/index.php?action=admin' >Welcome " . $clientData['clientFirstname'] . "</a></h1>";
+        $_SESSION['bannerName'] = "<h1 id = 'banner-name'><a href = '/phpmotors/accounts/index.php?action=admin' >Welcome " . $_SESSION['clientData']['clientFirstname'] . "</a></h1>";
 
         // display client full name in H1 Tag
-        $_SESSION['clientName'] = "<h1 id = 'client-fullName'>" . "Logged in as: " . $clientData['clientFirstname'] . " " . $clientData['clientLastname'] . "</h1>";
+        $_SESSION['clientName'] = "<h1 id = 'client-fullName'>" . "Logged in as: " . $_SESSION['clientData']['clientFirstname'] . " " . $_SESSION['clientData']['clientLastname'] . "</h1>";
 
         // display client data in UL tag
         $_SESSION['clientLogin'] = "<ul id = 'client-data'>"
-        . "<li> First Name: " . $clientData['clientFirstname'] . "</li>" 
-        . "<li> Last Name: " . $clientData['clientLastname'] . "</li>" 
-        . "<li> Email: " . $clientData['clientEmail'] . "</li>" 
+        . "<li> First Name: " . $_SESSION['clientData']['clientFirstname'] . "</li>" 
+        . "<li> Last Name: " . $_SESSION['clientData']['clientLastname'] . "</li>" 
+        . "<li> Email: " . $_SESSION['clientData']['clientEmail'] . "</li>" 
         . "</ul>";
-        include '../view/admin.php';
+        header('Location: /phpmotors/accounts/index.php');
         exit;
 
     break;
@@ -184,8 +184,82 @@ $action = filter_input(INPUT_POST, 'action');
             $accountMessage = '<p>This is the same email.</p>';
         }
 
+        //Check for existing email only if the client is trying to change the current email
+        $checkNewEmail = checkNewEmail($clientEmail, $clientId);
+        if($checkNewEmail){
+            // Check for an existing email
+            $existingEmail = checkExistingEmail($clientEmail);
+
+            // Check for existing email address in the table
+            if($existingEmail){
+                $message = "<p class='error-notice'>That email address is already being used by another account.</p>";
+                include '../view/client-update.php';
+                exit;
+            }
+        }
+
+        //Send the data to the model
+        $updateOutcome = updateClient($clientFirstname, $clientLastname, $clientEmail, $clientId);
+
+        //Check and report the result
+        if($updateOutcome === 1){
+            setcookie('firstname', $clientFirstname, strtotime('+1 year'), '/');
+            
+            //Update session
+            $clientData = getClientData($clientId);
+
+            // Store the array into the session
+            $_SESSION['clientData'] = $clientData;
+
+            $message = "<p class='notice'>$clientFirstname, your info has been updated.</p>";   
+            $_SESSION['message'] = $message;
+            header('Location: /phpmotors/accounts/');
+            exit;
+        } 
+        else {
+            $message = "<p class='error-notice'>No information was updated.</p>";   
+            $_SESSION['message'] = $message;
+            header('Location: /phpmotors/accounts/');
+            exit;
+        }
+
         include '../view/client-update.php';
     break;
+
+    case 'update-password':
+        // Filter and store the data
+        $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT);
+        $clientPassword = trim(filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING));
+        $checkPassword = checkPassword($clientPassword);
+
+        // Check for missing data
+        if(empty($checkPassword)){
+            $passMessage = '<p class="error-notice">Please make sure your password matches the requirements.</p>';
+            include '../view/client-update.php';
+            exit; 
+        }
+
+        // Hash the checked password
+        $hashedPassword = password_hash($clientPassword, PASSWORD_DEFAULT);
+
+        //Send the data to the model
+        $changeOutcome = changePassword($hashedPassword, $clientId);
+        
+        //Check and report the result
+        if($changeOutcome === 1){
+            $passMessage = "<p class='notice'>Your password has been updated.</p>";   
+            $_SESSION['message'] = $passMessage;
+            header('Location: /phpmotors/accounts/index.php');
+            exit;
+        } 
+        else {
+            $message = "<p class='error-notice'>Error: Password wasn't updated. Please try again.</p>";   
+            $_SESSION['message'] = $message;
+            header('Location: /phpmotors/accounts/index.php');
+            exit;
+        }
+    break; 
+
 
     default:
         include '../view/admin.php';
