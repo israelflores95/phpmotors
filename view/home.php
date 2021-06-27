@@ -31,7 +31,7 @@
             <button id="ownTodayBtn">Own Today!</button>
         </section>
 
-            <img id="carImg" src="/phpmotors/images/delorean.jpg" alt="delorean car">
+            <img id="carImg" src="/phpmotors/images/vehicles/delorean.jpg" alt="delorean car">
 
             <section id="doubleFlex">
            

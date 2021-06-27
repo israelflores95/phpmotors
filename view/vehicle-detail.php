@@ -18,8 +18,9 @@
   </nav>
 
 <!-- Content starts here -->
-  <section>
-
+  <section class="detailed-view">
+  <!-- Display detail vehicle information here -->
+  <?php if (isset($vehicleDetailDisplay)) { echo $vehicleDetailDisplay;} ?>
 
   </section>
 

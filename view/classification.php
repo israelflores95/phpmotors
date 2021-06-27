@@ -3,7 +3,7 @@
 <head>
 
   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/head.php'; ?>
-  <title>PHP motors | Templates</title>
+  <title><?php echo $classificationName; ?> vehicles | PHP Motors, Inc.</title>
 
 </head>
 
@@ -19,6 +19,13 @@
 
 <!-- Content starts here -->
   <section>
+    <h1 class="vehicle-heading"><?php echo $classificationName; ?> vehicles</h1>
+
+    <!-- error message if needed -->
+    <?php if(isset($message)){echo $message; } ?>
+
+    <!-- Display vehicle list -->
+    <?php if(isset($vehicleDisplay)){echo $vehicleDisplay;} ?>
 
 
   </section>

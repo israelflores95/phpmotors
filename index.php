@@ -16,7 +16,9 @@ $classifications = getClassifications();
 $navList = '';
 $navList .= "<div><a href='/phpmotors/index.php' title='View the PHP Motors home page'>Home</a></div>";
 foreach ($classifications as $classification) {
- $navList .= "<div><a href='/phpmotors/index.php?action=".urlencode($classification['classificationName'])."' title='View our $classification[classificationName] product line'>$classification[classificationName]</a></div>";
+ $navList .= "<div><a href='/phpmotors/vehicles/?action=classification&classificationName="
+.urlencode($classification['classificationName']).
+ "' title='View our $classification[classificationName] lineup of vehicles'>$classification[classificationName]</a></div>";
 }
 $navList .= '';
  

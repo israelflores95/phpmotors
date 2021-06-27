@@ -165,4 +165,47 @@ function deleteVehicle($invId){
     // Return the indication of success (rows changed)
     return $rowsChanged;
 }
+
+// List of vehicles based on classification
+function getVehiclesByClassification($classificationName) {
+    $db = phpmotorsConnect();
+    $sql = 'SELECT * FROM inventory WHERE classificationId IN (SELECT classificationId FROM carclassification WHERE classificationName = :classificationName)';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':classificationName', $classificationName, PDO::PARAM_STR);
+    $stmt->execute();
+    $vehicles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $vehicles;
+}
+
+function getVehicle($invMake,$invModel){
+    $db = phpmotorsConnect();
+    $sql = 'SELECT * FROM inventory WHERE invMake = :invMake and invModel = :invModel';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':invMake', $invMake, PDO::PARAM_STR);
+    $stmt->bindValue(':invModel', $invModel, PDO::PARAM_STR);
+    $stmt->execute();
+    $invInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $invInfo;
+}
+
+function buildVehicleDetailDisplay($vehicle)
+{
+  $dv = "<h1>$vehicle[invMake] $vehicle[invModel]</h1>";
+  $dv .= '<div class="vehicle-detail">';
+  $dv .= '<div class="vehicle-large-image">';
+  $dv .= "<img src='$vehicle[invImage]' alt='Image of $vehicle[invMake] $vehicle[invModel]'>";
+  $dv .= '</div>';
+  $dv .= '<div class="vehicle-data">';
+  $dv .= "<h2>$vehicle[invMake] $vehicle[invModel] Details</h2>";
+  $dv .= "<p class='gray'>$vehicle[invDescription]</p>";
+  $dv .= "<p>Color:</span>$vehicle[invColor]</p>";
+  $dv .= "<p class='gray'># in Stock:$vehicle[invStock]</p>";
+  $formattedPrice = number_format($vehicle['invPrice'],2);
+  $dv .= "<p>Price: $formattedPrice</p>";
+  $dv .= '</div>';
+
+  return $dv;
+}
 ?>

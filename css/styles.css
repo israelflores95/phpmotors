@@ -242,3 +242,68 @@ option:disabled {
    padding-left: 15px;
    padding-top: 15px;
 }
+
+/* classifications nav bar view */
+
+.vehicle-heading {
+   font-size: 140%;
+}
+#inv-display {
+   display: flex;
+   flex-wrap: wrap;
+   flex-direction: row;
+   list-style-type: none;
+   justify-content: space-evenly;
+   
+}
+
+.vehicle-list-items {
+   max-height: 240px;
+   border: 1px solid;
+   border-radius: 5px;
+}
+
+.vehicle-list-items img{
+   height: 60%;
+   border-radius: 5px;
+}
+
+.vehicle-list-items div {
+   display: flex;
+   justify-content: space-evenly;
+}
+
+.vehicle-list-items h2 {
+   text-align: center;
+   padding: 0px;
+   margin: 5px;
+}
+
+
+.vehicle-price {
+   font-size: 110%;
+   margin-bottom: 80px;
+   position: relative;
+   bottom: 0;
+}
+
+/* vehicle detaild view */
+
+.detailed-view h1{
+   text-align: center;
+}
+
+.vehicle-detail {
+   display: flex;
+   flex-direction: column;
+}
+
+.vehicle-large-image {
+   margin: auto;
+}
+
+.vehicle-data {
+   text-align: center;
+   padding-left: 25px;
+   padding-right: 25px;
+}

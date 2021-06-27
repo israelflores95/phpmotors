@@ -5,7 +5,7 @@ session_start();
 /*
 * Vehicles controller 
 */
-
+ 
 // Get the database connection file
 require_once '../library/connections.php';
 // Get the PHP Motors model for use as needed
@@ -197,6 +197,34 @@ $action = filter_input(INPUT_POST, 'action');
              header('Location: /phpmotors/view/vehicle-update.php');
              exit;
          }
+    break;
+
+    case 'classification':
+        $classificationName = filter_input(INPUT_GET, 'classificationName', FILTER_SANITIZE_STRING);
+
+        $vehicles = getVehiclesByClassification($classificationName);
+
+        if(!count($vehicles)){
+            $message = "<p class='notice'>Sorry, no $classificationName vehicles could be found.</p>";
+          } else {
+            $vehicleDisplay = buildVehiclesDisplay($vehicles);
+          }
+
+        //   echo $vehicleDisplay;
+        //   exit;
+      include '../view/classification.php';
+    break;
+
+    case 'vehicleinfo':
+        $invMake = filter_input(INPUT_GET, 'invMake', FILTER_SANITIZE_STRING);
+        $invModel = filter_input(INPUT_GET, 'invModel', FILTER_SANITIZE_STRING);
+        $vehicle = getVehicle($invMake,$invModel);
+        if (!count($vehicle)) {
+          $message = "<p class='notice'>Sorry, no vehicle $invMake $invModel could be found.</p>";
+        } else {
+          $vehicleDetailDisplay = buildVehicleDetailDisplay($vehicle);
+        }
+        include '../view/vehicle-detail.php';
     break;
 
         default:

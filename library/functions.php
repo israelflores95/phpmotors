@@ -22,5 +22,26 @@ function buildClassificationList($classifications){
    } 
    $classificationList .= '</select>'; 
    return $classificationList; 
-  }
+}
+
+function buildVehiclesDisplay($vehicles){
+
+   $dv = '<ul id="inv-display">';
+   foreach ($vehicles as $vehicle) {
+    $dv .= '<li class = vehicle-list-items>';
+    $dv .= "<a href='/phpmotors/vehicles?action=vehicleinfo&invMake=" . urlencode($vehicle['invMake']) . "&invModel=" . urlencode($vehicle['invModel']) . "'>";
+    $dv .= "<div id='images'><img src='$vehicle[invThumbnail]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'></div>";
+    $dv .= '</a>';
+    $dv .= '<hr>';
+    $dv .= "<a href='/phpmotors/vehicles?action=vehicleinfo&invMake=" . urlencode($vehicle['invMake']) . "&invModel=" . urlencode($vehicle['invModel']) . "'>";
+    $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2>";
+    $dv .= '</a>';
+    $formattedPrice = number_format($vehicle['invPrice'],2);
+    $dv .= "<span class=vehicle-price>$formattedPrice</span></a>";
+    $dv .= '</li>';
+   }
+   $dv .= '</ul>';
+   return $dv;
+}
+
 ?>
