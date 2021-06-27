@@ -37,7 +37,7 @@ function buildVehiclesDisplay($vehicles){
     $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2>";
     $dv .= '</a>';
     $formattedPrice = number_format($vehicle['invPrice'],2);
-    $dv .= "<span class=vehicle-price>$formattedPrice</span></a>";
+    $dv .= "<span class=vehicle-price>$ $formattedPrice</span></a>";
     $dv .= '</li>';
    }
    $dv .= '</ul>';

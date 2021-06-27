@@ -203,7 +203,7 @@ function buildVehicleDetailDisplay($vehicle)
   $dv .= "<p>Color:</span>$vehicle[invColor]</p>";
   $dv .= "<p class='gray'># in Stock:$vehicle[invStock]</p>";
   $formattedPrice = number_format($vehicle['invPrice'],2);
-  $dv .= "<p>Price: $formattedPrice</p>";
+  $dv .= "<p>Price: $ $formattedPrice</p>";
   $dv .= '</div>';
 
   return $dv;
