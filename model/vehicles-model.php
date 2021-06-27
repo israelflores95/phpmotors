@@ -192,7 +192,7 @@ function getVehicle($invMake,$invModel){
 
 function buildVehicleDetailDisplay($vehicle)
 {
-  $dv = "<h1>$vehicle[invMake] $vehicle[invModel]</h1>";
+  $dv = "<h2>$vehicle[invMake] $vehicle[invModel]</h2>";
   $dv .= '<div class="vehicle-detail">';
   $dv .= '<div class="vehicle-large-image">';
   $dv .= "<img src='$vehicle[invImage]' alt='Image of $vehicle[invMake] $vehicle[invModel]'>";
@@ -200,11 +200,11 @@ function buildVehicleDetailDisplay($vehicle)
   $dv .= '<div class="vehicle-data">';
   $dv .= "<h2>$vehicle[invMake] $vehicle[invModel] Details</h2>";
   $dv .= "<p class='gray'>$vehicle[invDescription]</p>";
-  $dv .= "<p>Color:</span>$vehicle[invColor]</p>";
+  $dv .= "<p>Color:$vehicle[invColor]</p>";
   $dv .= "<p class='gray'># in Stock:$vehicle[invStock]</p>";
   $formattedPrice = number_format($vehicle['invPrice'],2);
   $dv .= "<p>Price: $ $formattedPrice</p>";
-  $dv .= '</div>';
+  $dv .= '</div></div>';
 
   return $dv;
 }
