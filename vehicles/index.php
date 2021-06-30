@@ -20,22 +20,12 @@ require_once '../library/functions.php';
 // Get the array of classifications
 $classifications = getClassifications();
 
+// Build a navigation bar using the $classifications array
+$navList = buildNavigation($classifications);
+
 // get array for classificationId
 $classificationid = getClassificationList();
 
-// Build a navigation bar using the $classifications array
-$navList = '';
-$navList .= "<div><a href='/phpmotors/index.php' title='View the PHP Motors home page'>Home</a></div>";
-foreach ($classifications as $classification) {
- $navList .= "<div><a href='/phpmotors/index.php?action=".urlencode($classification['classificationName'])."' title='View our $classification[classificationName] product line'>$classification[classificationName]</a></div>";
-}
-$navList .= '';
-
-// // Build dynamic classification dropdown list
-// $classList = '';
-// foreach ($classificationid as $classification) {
-//  $classList .= "<option value='$classification[classificationId]'>$classification[classificationName]</option>";
-// }
 
 $action = filter_input(INPUT_POST, 'action');
  if ($action == NULL){
