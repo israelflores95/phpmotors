@@ -9,18 +9,21 @@ session_start();
 // get accounts model
  require_once 'model/accounts-model.php';
 
+ require_once 'library/functions.php';
+
 // Get the array of classifications
 $classifications = getClassifications();
 
 // Build a navigation bar using the $classifications array
-$navList = '';
-$navList .= "<div><a href='/phpmotors/index.php' title='View the PHP Motors home page'>Home</a></div>";
-foreach ($classifications as $classification) {
- $navList .= "<div><a href='/phpmotors/vehicles/?action=classification&classificationName="
-.urlencode($classification['classificationName']).
- "' title='View our $classification[classificationName] lineup of vehicles'>$classification[classificationName]</a></div>";
-}
-$navList .= '';
+$navList = buildNavigation($classifications);
+// $navList = '';
+// $navList .= "<div><a href='/phpmotors/index.php' title='View the PHP Motors home page'>Home</a></div>";
+// foreach ($classifications as $classification) {
+//  $navList .= "<div><a href='/phpmotors/vehicles/?action=classification&classificationName="
+// .urlencode($classification['classificationName']).
+//  "' title='View our $classification[classificationName] lineup of vehicles'>$classification[classificationName]</a></div>";
+// }
+// $navList .= '';
  
 //----------------testing------------------
  //echo $navList;

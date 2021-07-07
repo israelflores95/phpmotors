@@ -25,7 +25,7 @@ if ($action == NULL) {
 * Variables for use with the Image Upload Functionality
 * **************************************************** */
 // directory name where uploaded images are stored
-$image_dir = '/phpmotors/uploads/images';
+$image_dir = '/phpmotors/images/vehicles';
 // The path is the full path from the server root
 $image_dir_path = $_SERVER['DOCUMENT_ROOT'] . $image_dir;
 
@@ -113,6 +113,7 @@ switch ($action) {
             
         // Get vehicles information from database
         $vehicles = getVehicles();
+
         // Build a select list of vehicle information for the view
         $prodSelect = buildVehiclesSelect($vehicles);
             

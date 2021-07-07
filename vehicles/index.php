@@ -209,10 +209,14 @@ $action = filter_input(INPUT_POST, 'action');
         $invMake = filter_input(INPUT_GET, 'invMake', FILTER_SANITIZE_STRING);
         $invModel = filter_input(INPUT_GET, 'invModel', FILTER_SANITIZE_STRING);
         $vehicle = getVehicle($invMake,$invModel);
+        $vehicleImages = getVehicleById($vehicle['invId']);
         if (!count($vehicle)) {
           $message = "<p class='notice'>Sorry, no vehicle $invMake $invModel could be found.</p>";
         } else {
-          $vehicleDetailDisplay = buildVehicleDetailDisplay($vehicle);
+          $vehicleDetailDisplay = buildVehicleDetailDisplay($vehicle, $vehicleImages);
+
+        //   var_dump($vehicleImages);
+        //   exit;
         }
         include '../view/vehicle-detail.php';
     break;

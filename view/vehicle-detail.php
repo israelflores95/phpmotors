@@ -3,7 +3,7 @@
 <head>
 
   <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/head.php'; ?>
-  <title>PHP motors | Templates</title>
+  <title>Detailed | PHP motors</title>
 
 </head>
 

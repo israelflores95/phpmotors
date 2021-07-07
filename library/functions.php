@@ -29,30 +29,56 @@ function buildClassificationList($classifications){
       $navList = '';
       $navList .= "<div><a href='/phpmotors/index.php' title='View the PHP Motors home page'>Home</a></div>";
       foreach ($classifications as $classification) {
-       $navList .= "<div><a href='/phpmotors/index.php?action=".urlencode($classification['classificationName'])."' title='View our $classification[classificationName] product line'>$classification[classificationName]</a></div>";
+      $navList .= "<div><a href='/phpmotors/vehicles/?action=classification&classificationName="
+      .urlencode($classification['classificationName']).
+      "' title='View our $classification[classificationName] lineup of vehicles'>$classification[classificationName]</a></div>";
       }
       $navList .= '';
+      // $navList = '';
+      // $navList .= "<div><a href='/phpmotors/index.php' title='View the PHP Motors home page'>Home</a></div>";
+      // foreach ($classifications as $classification) {
+      //  $navList .= "<div><a href='/phpmotors/index.php?action=".urlencode($classification['classificationName'])."' title='View our $classification[classificationName] product line'>$classification[classificationName]</a></div>";
+      // }
+      // $navList .= '';
       return $navList;
    }
+// this function will build a display of vehicles within an unordered list, it will return back to the index.php inside the "vehicles" folder
+function buildVehiclesDisplay($vehicles) {
+    $dv = '<div class="vehicle-display">';
+    $dv .= '<ul id="inv-display">';
+    foreach ($vehicles as $vehicle) {
+        $dv .= '<li>';
+        $dv .= "<a href='/phpmotors/vehicles?action=vehicleinfo&invMake=" . urlencode($vehicle['invMake']) . "&invModel=" . urlencode($vehicle['invModel']) . "'><img src='$vehicle[imgPath]' class='vehicle-image' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
+        $dv .= '<hr>';
+        $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2></a>";
+        $formattedPrice = number_format($vehicle['invPrice'], 2);
+        $dv .= "<span>$formattedPrice</span>";
+        $dv .= '</li>';
+    }
+    $dv .= '</ul>';
+    $dv .= '</div>';
+    return $dv;
+}
 
-function buildVehiclesDisplay($vehicles){
+function buildVehicleDetailDisplay($vehicle,$vehicleImages) {
+  $dv = "<h2>$vehicle[invMake] $vehicle[invModel]</h2>";
 
-   $dv = '<ul id="inv-display">';
-   foreach ($vehicles as $vehicle) {
-    $dv .= '<li class = vehicle-list-items>';
-    $dv .= "<a href='/phpmotors/vehicles?action=vehicleinfo&invMake=" . urlencode($vehicle['invMake']) . "&invModel=" . urlencode($vehicle['invModel']) . "'>";
-    $dv .= "<div class='thumb-images'><img src='$vehicle[invThumbnail]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'></div>";
-    $dv .= '</a>';
-    $dv .= '<hr>';
-    $dv .= "<a href='/phpmotors/vehicles?action=vehicleinfo&invMake=" . urlencode($vehicle['invMake']) . "&invModel=" . urlencode($vehicle['invModel']) . "'>";
-    $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2>";
-    $dv .= '</a>';
-    $formattedPrice = number_format($vehicle['invPrice'],2);
-    $dv .= "<span class=vehicle-price>$ $formattedPrice</span>";
-    $dv .= '</li>';
-   }
-   $dv .= '</ul>';
-   return $dv;
+  $dv .= '<div class="vehicle-detail">';
+  $dv .= '<div>';
+  $dv .= "<img class='secondary-image' src='$vehicleImages[imgPath]' alt='Image of $vehicle[invMake] $vehicle[invModel]'>";
+  $dv .= "<img class='vehicle-large-image' src='$vehicle[invImage]' alt='Image of $vehicle[invMake] $vehicle[invModel]'>";
+  $dv .= '</div>';
+
+  $dv .= '<div class="vehicle-data">';
+  $dv .= "<h2>$vehicle[invMake] $vehicle[invModel] Details</h2>";
+  $dv .= "<p class='gray'>$vehicle[invDescription]</p>";
+  $dv .= "<p>Color:$vehicle[invColor]</p>";
+  $dv .= "<p class='gray'># in Stock:$vehicle[invStock]</p>";
+  $formattedPrice = number_format($vehicle['invPrice'],2);
+  $dv .= "<p>Price: $ $formattedPrice</p>";
+  $dv .= '</div></div>';
+
+  return $dv;
 }
 
 /* * ********************************
@@ -81,6 +107,7 @@ function buildImageDisplay($imageArray) {
    return $id;
 }
 
+
 // Build the vehicles select list
 function buildVehiclesSelect($vehicles) {
    $prodList = '<select name="invId" id="invId">';
@@ -91,6 +118,29 @@ function buildVehiclesSelect($vehicles) {
    $prodList .= '</select>';
    return $prodList;
 }
+
+function buildCarsDisplay($cars) {
+   $price = number_format($cars['invPrice'], 0);
+
+   $dc = '<div id="car-display">';
+   $dc .= "<div>";
+
+   foreach($cars["images"] as $car_image){
+       $dc .= "<img src='".$car_image['imgPath']."' alt='Image of $cars[invMake] $cars[invModel] on phpmotors.com'>";
+   }
+
+   $dc .= "<h1>Price : $ $price</h1>";
+
+   $dc .= "</div>";
+   $dc .= "<div>";
+   $dc .= "<h2>$cars[invMake] - $cars[invModel] Details</h2>";
+   $dc .= "<p>$cars[invDescription]</p>";
+   $dc .= "<p><b>Color:</b> $cars[invColor]</p>";
+   $dc .= "<p><b># in stock:</b> Only $cars[invStock] more left!</p>";
+   $dc .= "</div>";
+   $dc .= '</div>';
+   return $dc;
+} 
 
 // Handles the file upload process and returns the path
 // The file path is stored into the database

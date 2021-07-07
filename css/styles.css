@@ -254,17 +254,27 @@ option:disabled {
    flex-direction: row;
    list-style-type: none;
    justify-content: space-evenly;
-   
+   padding: 0px;
+}
+
+#inv-display li {
+   margin: 10px;
+   border: 1px solid;
+   max-width: 40%;
+}
+
+.vehicle-image {
+   max-width: 100%;
 }
 
 .vehicle-list-items {
-   max-height: 240px;
+   
    border: 1px solid;
    border-radius: 5px;
 }
 
 .vehicle-list-items img{
-   height: 60%;
+   
    border-radius: 5px;
 }
 
@@ -299,11 +309,21 @@ option:disabled {
 }
 
 .vehicle-large-image {
-   margin: auto;
+  height: 200px;
 }
 
 .vehicle-data {
    text-align: center;
    padding-left: 25px;
    padding-right: 25px;
+}
+
+.secondary-image {
+   height: 100px;
+   padding: 5px;
+}
+
+.secondary-image:hover {
+   height: 150px;
+   transition: 0.5s;
 }

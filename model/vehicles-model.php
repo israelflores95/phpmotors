@@ -169,7 +169,8 @@ function deleteVehicle($invId){
 // List of vehicles based on classification
 function getVehiclesByClassification($classificationName) {
     $db = phpmotorsConnect();
-    $sql = 'SELECT * FROM inventory WHERE classificationId IN (SELECT classificationId FROM carclassification WHERE classificationName = :classificationName)';
+    $sql = 'SELECT * FROM images INNER JOIN inventory ON images.invId = inventory.invId WHERE images.imgPath NOT LIKE "%-tn.jpg" AND inventory.classificationId IN (SELECT classificationId FROM carclassification WHERE classificationName = :classificationName)';
+    //$sql = 'SELECT * FROM inventory WHERE classificationId IN (SELECT classificationId FROM carclassification WHERE classificationName = :classificationName)';
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':classificationName', $classificationName, PDO::PARAM_STR);
     $stmt->execute();
@@ -190,24 +191,18 @@ function getVehicle($invMake,$invModel){
     return $invInfo;
 }
 
-function buildVehicleDetailDisplay($vehicle)
-{
-  $dv = "<h2>$vehicle[invMake] $vehicle[invModel]</h2>";
-  $dv .= '<div class="vehicle-detail">';
-  $dv .= '<div class="vehicle-large-image">';
-  $dv .= "<img src='$vehicle[invImage]' alt='Image of $vehicle[invMake] $vehicle[invModel]'>";
-  $dv .= '</div>';
-  $dv .= '<div class="vehicle-data">';
-  $dv .= "<h2>$vehicle[invMake] $vehicle[invModel] Details</h2>";
-  $dv .= "<p class='gray'>$vehicle[invDescription]</p>";
-  $dv .= "<p>Color:$vehicle[invColor]</p>";
-  $dv .= "<p class='gray'># in Stock:$vehicle[invStock]</p>";
-  $formattedPrice = number_format($vehicle['invPrice'],2);
-  $dv .= "<p>Price: $ $formattedPrice</p>";
-  $dv .= '</div></div>';
-
-  return $dv;
+function getVehicleById($invId){
+    $db = phpmotorsConnect();
+    $sql = 'SELECT * FROM images WHERE invId = :invId AND imgPrimary = 0';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+    // $stmt->bindValue(':imgPrimary', $invId, PDO::PARAM_INT);
+    $stmt->execute();
+    $invInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $invInfo;
 }
+
 
 // Get information for all vehicles
 function getVehicles(){
