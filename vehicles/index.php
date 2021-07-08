@@ -206,10 +206,11 @@ $action = filter_input(INPUT_POST, 'action');
     break;
 
     case 'vehicleinfo':
-        $invMake = filter_input(INPUT_GET, 'invMake', FILTER_SANITIZE_STRING);
-        $invModel = filter_input(INPUT_GET, 'invModel', FILTER_SANITIZE_STRING);
-        $vehicle = getVehicle($invMake,$invModel);
-        $vehicleImages = getVehicleById($vehicle['invId']);
+        $invId = filter_input(INPUT_GET, 'invId', FILTER_SANITIZE_NUMBER_INT);
+
+        $vehicle = getVehicle($invId);
+        $vehicleImages = getThumbnails($invId);
+
         if (!count($vehicle)) {
           $message = "<p class='notice'>Sorry, no vehicle $invMake $invModel could be found.</p>";
         } else {

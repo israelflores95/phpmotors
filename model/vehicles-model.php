@@ -169,7 +169,7 @@ function deleteVehicle($invId){
 // List of vehicles based on classification
 function getVehiclesByClassification($classificationName) {
     $db = phpmotorsConnect();
-    $sql = 'SELECT * FROM images INNER JOIN inventory ON images.invId = inventory.invId WHERE images.imgPath NOT LIKE "%-tn.jpg" AND inventory.classificationId IN (SELECT classificationId FROM carclassification WHERE classificationName = :classificationName)';
+    $sql = 'SELECT * FROM images JOIN inventory ON images.invId = inventory.invId WHERE images.imgPath LIKE "%-tn%" AND images.imgPrimary = 1 AND inventory.classificationId IN (SELECT classificationId FROM carclassification WHERE classificationName = :classificationName)';
     //$sql = 'SELECT * FROM inventory WHERE classificationId IN (SELECT classificationId FROM carclassification WHERE classificationName = :classificationName)';
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':classificationName', $classificationName, PDO::PARAM_STR);
@@ -179,26 +179,25 @@ function getVehiclesByClassification($classificationName) {
     return $vehicles;
 }
 
-function getVehicle($invMake,$invModel){
+function getVehicle($invId){
     $db = phpmotorsConnect();
-    $sql = 'SELECT * FROM inventory WHERE invMake = :invMake and invModel = :invModel';
+    $sql = 'SELECT * FROM inventory JOIN images ON inventory.invId = images.invId WHERE inventory.invId = :invId AND images.imgPrimary = 1 AND images.imgPath NOT LIKE "%-tn%"';
     $stmt = $db->prepare($sql);
-    $stmt->bindValue(':invMake', $invMake, PDO::PARAM_STR);
-    $stmt->bindValue(':invModel', $invModel, PDO::PARAM_STR);
+    $stmt->bindValue(':invId', $invId, PDO::PARAM_STR);
     $stmt->execute();
     $invInfo = $stmt->fetch(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
     return $invInfo;
 }
 
-function getVehicleById($invId){
+function getThumbnails($invId){
     $db = phpmotorsConnect();
-    $sql = 'SELECT * FROM images WHERE invId = :invId AND imgPrimary = 0';
+    $sql = 'SELECT * FROM images WHERE invId = :invId AND imgPrimary = 0 AND imgPath LIKE "%-tn%"';
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
     // $stmt->bindValue(':imgPrimary', $invId, PDO::PARAM_INT);
     $stmt->execute();
-    $invInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+    $invInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
     return $invInfo;
 }

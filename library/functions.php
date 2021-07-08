@@ -48,7 +48,7 @@ function buildVehiclesDisplay($vehicles) {
     $dv .= '<ul id="inv-display">';
     foreach ($vehicles as $vehicle) {
         $dv .= '<li>';
-        $dv .= "<a href='/phpmotors/vehicles?action=vehicleinfo&invMake=" . urlencode($vehicle['invMake']) . "&invModel=" . urlencode($vehicle['invModel']) . "'><img src='$vehicle[imgPath]' class='vehicle-image' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
+        $dv .= "<a href='/phpmotors/vehicles?action=vehicleinfo&invId=" . urlencode($vehicle['invId']) . "'><img src='$vehicle[imgPath]' class='vehicle-image' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
         $dv .= '<hr>';
         $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2></a>";
         $formattedPrice = number_format($vehicle['invPrice'], 2);
@@ -65,7 +65,9 @@ function buildVehicleDetailDisplay($vehicle,$vehicleImages) {
 
   $dv .= '<div class="vehicle-detail">';
   $dv .= '<div>';
-  $dv .= "<img class='secondary-image' src='$vehicleImages[imgPath]' alt='Image of $vehicle[invMake] $vehicle[invModel]'>";
+foreach ($vehicleImages as $thumbnails) {
+  $dv .= "<img class='secondary-image' src='$thumbnails[imgPath]' alt='Image of $vehicle[invMake] $vehicle[invModel]'>";
+}
   $dv .= "<img class='vehicle-large-image' src='$vehicle[invImage]' alt='Image of $vehicle[invMake] $vehicle[invModel]'>";
   $dv .= '</div>';
 
