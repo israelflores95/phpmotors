@@ -22,6 +22,8 @@
   <section class="detailed-view">
   <!-- Display detail vehicle information here -->
   <?php if (isset($vehicleDetailDisplay)) { echo $vehicleDetailDisplay;} ?>
+
+  
   
 
   </section>
@@ -35,6 +37,8 @@
         echo '<p>A review can be added by "logging in" </p>';
         echo '<a href="../accounts/index.php?action=Login">Click here to log in</a>';
     }
+    
+    if (isset($message)) { echo $message;}
 
     // create review form
     if (isset($reviewForm)) { echo $reviewForm;}

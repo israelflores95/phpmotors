@@ -54,7 +54,7 @@ $action = filter_input(INPUT_POST, 'action');
         if (empty($screenName) || empty($reviewText)) {
 
             $specificVehicleReviewData = getVehicleReviews($invId); // check if the vehicle has any data or not, display the "Be the first to write..." if it is empty
-            $submitMessage = '<p>Please provide information for the review text field.</p>';
+            $message = '<p class="notice-bad">*Please provide information for the review text field.</p>';
             include '../view/vehicle-detail.php';
             exit;
         }
@@ -62,7 +62,7 @@ $action = filter_input(INPUT_POST, 'action');
         $submitReviewOutcome = insertReview($reviewText, $reviewDate, $invId, $clientId);
 
         if ($submitReviewOutcome === 1) {
-            $submitMessage = "<p'>Thanks for the review. It is displayed below!</p>";
+            $message = "<p>Thanks for the review. It is displayed below!</p>";
 
             // grab all the vehicle's data based on the id
             $specificVehicleReviewData = getVehicleReviews($invId);
