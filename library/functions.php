@@ -78,9 +78,71 @@ foreach ($vehicleImages as $thumbnails) {
   $dv .= "<p class='gray'># in Stock:$vehicle[invStock]</p>";
   $formattedPrice = number_format($vehicle['invPrice'],2);
   $dv .= "<p>Price: $ $formattedPrice</p>";
+  $dv .= '  <h4>Vehicle reviews can be seen at the bottom of the page</h4>';
   $dv .= '</div></div>';
 
   return $dv;
+}
+
+function buildReviewForm($screenName, $invId, $clientId) {
+
+   $reviewForm = '<form action="/phpmotors/reviews/index.php" method="post">';
+   $reviewForm .= '<fieldset>';
+   $reviewForm .= '<legend>Review:</legend>';
+   $reviewForm .= '<label for="screenName">Screen Name</label><br>';
+   $reviewForm .= "<input type='text' id='screenName' name='screenName' value='$screenName' required readonly><br>";
+   $reviewForm .= '<label for="reviewText">Review</label><br>';
+   $reviewForm .= '<textarea rows = "none" cols="none" id="reviewText" name="reviewText" required></textarea><br>';
+   $reviewForm .= '<input type="submit" name="submit" value="Submit Review" id="signInButton"><br>';
+   $reviewForm .= "<input type='hidden' name='invId' value='$invId'>";
+   $reviewForm .= "<input type='hidden' name='clientId' value='$clientId'>";
+   $reviewForm .= '<input type="hidden" name="action" value="new-review">';
+   $reviewForm .= '</fieldset>';
+   $reviewForm .= '</form>';
+
+   return $reviewForm;
+}
+
+function buildDeleteForm($reviewData, $reviewId) {
+   $deleteForm = '';
+   $deleteForm .= '<div id="review-text">';
+   $deleteForm .= "$reviewData[reviewText]";
+   $deleteForm .= '</div>';
+   $deleteForm .= '<div>';
+   $deleteForm .= "<a href='/phpmotors/reviews/index.php?action=delete-review&reviewId=$reviewId'>Delete Review</a>";
+   $deleteForm .= '</div>';
+
+   return $deleteForm;
+}
+
+function buildEditForm($reviewData, $reviewId) {
+   $editForm = '';
+   $editForm .= '<div class="review-box">';
+   $editForm .= "<form action='/phpmotors/reviews/index.php' method='POST'>";
+   $editForm .= "<TEXTarea name='updateReviewText'>$reviewData[reviewText]</TEXTarea>";
+   $editForm .= "<input type='submit' value='Update Review'>";
+   $editForm .= "<input type='hidden' name='action' value='update-review'>";
+   $editForm .= "<input type='hidden' name='reviewId' value='$reviewId'>";
+   $editForm .= "</form>";
+   $editForm .= "</div>";
+
+   return $editForm;
+}
+
+function createReviewList($specificVehicleReviewData) {
+    $reviewList = '<div>';
+
+    foreach ($specificVehicleReviewData as $eachReview) {
+        $clientFullname = substr($eachReview['clientFirstname'], 0, 1) . $eachReview['clientLastname'];
+        $reviewList .= '<div>';
+        $reviewList .= "<p>$clientFullname wrote on $eachReview[reviewDate] </p>";
+        $reviewList .= "<h2>Review: $eachReview[reviewText] </h2>";
+        $reviewList .= '</div>';
+    }
+
+    $reviewList .= '</div>';
+
+    return $reviewList;
 }
 
 /* * ********************************
@@ -143,6 +205,26 @@ function buildCarsDisplay($cars) {
    $dc .= '</div>';
    return $dc;
 } 
+
+// build client review list
+function createClientReviewList($clientReviews)
+{
+    $clientReviewList = '<div class="clientReivew-display">';
+    $clientReviewList .= '<ul>';
+    foreach ($clientReviews as $eachReview) {
+        
+        $clientReviewList .= "<li>$eachReview[invMake] $eachReview[invModel]";
+        $clientReviewList .= "<span> (Reviewed On $eachReview[reviewDate]): </span>";
+        $clientReviewList .= "<a href='../reviews/index.php?action=edit-review&reviewId=$eachReview[reviewId]'>Edit</a>";
+        $clientReviewList .= "<span> | </span>";
+        $clientReviewList .= "<a href='../reviews/index.php?action=delete-review-confirm&reviewId=$eachReview[reviewId]'>Delete</a>";
+        $clientReviewList .= '</li>';
+    }
+    $clientReviewList .= '</ul>';
+    $clientReviewList .= '</div>';
+
+    return $clientReviewList;
+}
 
 // Handles the file upload process and returns the path
 // The file path is stored into the database

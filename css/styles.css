@@ -129,9 +129,9 @@ footer {
    justify-content: space-evenly;
    text-align: center;
 }
-p {
+/* p {
    padding-left: 15px;
-}
+} */
 
 /* -------Login | forms flex -----------*/
 #formContainer {
@@ -326,4 +326,66 @@ option:disabled {
 .secondary-image:hover {
    height: 150px;
    transition: 0.5s;
+}
+
+.review label {
+   display: none;
+}
+
+.notice-good {
+   color: rgb(11, 187, 11);
+}
+
+.notice-bad {
+   color: red;
+}
+
+.review-delete-box div {
+   padding: 15px;
+   font-size: 25px;
+   margin: 10px;
+}
+
+#review-text {
+   border: solid black 1px;
+}
+
+.review-delete-box a , .edit-review-box input {
+   text-decoration: none;
+   color: black;
+   background-color: #4c96d7;
+   padding: 5px;
+   border-radius: 15px;
+}
+
+#admin-links p {
+   margin: 0px;
+   margin: 15px;
+}
+
+textarea {
+   width: 50%;
+}
+
+.my-reviews {
+   border: solid black 1px;
+   margin: 10px;
+}
+
+.my-reviews ul {
+   list-style-type: none;
+}
+
+.my-reviews ul li {
+   padding: 5px;
+   margin: 5px;
+   font-size: 20px;
+}
+
+.admin-content a , .my-reviews a{
+   text-decoration: none;
+   color: black;
+   background-color: #4c96d7;
+   padding: 5px;
+   border-radius: 5px;
 }

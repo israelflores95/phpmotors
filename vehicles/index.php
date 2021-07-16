@@ -16,6 +16,8 @@ require_once '../model/accounts-model.php';
 require_once '../model/vehicles-model.php';
 //  add vehicles model
 require_once '../library/functions.php';
+// add reviews model
+require_once '../model/reviews-model.php';
 
 // Get the array of classifications
 $classifications = getClassifications();
@@ -59,8 +61,8 @@ $action = filter_input(INPUT_POST, 'action');
         // check for empty fields and report message
         if(empty($invMake) || empty($invModel) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invColor) || empty($classificationId)){
             $message = '<p class = "server-valadation">Please provide information for all empty form fields.</p>';
-            // include '../view/add-vehicle.php';
-            header('Location: /phpmotors/view/add-vehicle.php');
+             include '../view/add-vehicle.php';
+            //header('Location: /phpmotors/view/add-vehicle.php');
             exit;
         }
 
@@ -86,7 +88,7 @@ $action = filter_input(INPUT_POST, 'action');
         // check for empty fields and report message
         if(empty($classificationName)){
             $message = '<p class = "server-valadation">*Please provide information for the empty field.</p>';
-            header('Location: /phpmotors/vehicles/index.php');
+            include '../view/add-classification.php';
             exit;
         }
 
@@ -211,6 +213,16 @@ $action = filter_input(INPUT_POST, 'action');
         $vehicle = getVehicle($invId);
         $vehicleImages = getThumbnails($invId);
 
+        // if the user is logged in get the clientId
+        if (isset($_SESSION['loggedin'])) {
+            $clientId = $_SESSION['clientData']['clientId'];
+            $screeName = substr($_SESSION['clientData']['clientFirstname'], 0, 1) . $_SESSION['clientData']['clientLastname'];
+            $_SESSION['screenName'] = $screeName;
+
+            $reviewForm = buildReviewForm($screeName, $invId, $clientId);
+        }
+
+
         if (!count($vehicle)) {
           $message = "<p class='notice'>Sorry, no vehicle $invMake $invModel could be found.</p>";
         } else {
@@ -219,6 +231,11 @@ $action = filter_input(INPUT_POST, 'action');
         //   var_dump($vehicleImages);
         //   exit;
         }
+
+        $specificVehicleReviewData = getVehicleReviews($invId);
+        $reviewList = createReviewList($specificVehicleReviewData);
+        $_SESSION['reviewList'] =  $reviewList;
+
         include '../view/vehicle-detail.php';
     break;
 

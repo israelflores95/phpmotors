@@ -12,6 +12,8 @@ session_start();
  require_once '../model/accounts-model.php';
  // Get the functions library
  require_once '../library/functions.php';
+//  add reviews model
+require_once '../model/reviews-model.php';
 
 // Get the array of classifications
 $classifications = getClassifications();
@@ -257,6 +259,10 @@ $action = filter_input(INPUT_POST, 'action');
 
 
     default:
+        $clientId = $_SESSION['clientData']['clientId']; // get the clientId
+        $specificClientReviewData = getClientReviews($clientId);
+        $reviewList = createClientReviewList($specificClientReviewData);
+        $_SESSION['clientReviewList'] =  $reviewList;
         include '../view/admin.php';
  };
 
