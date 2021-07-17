@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql:3306
--- Generation Time: Jul 16, 2021 at 08:20 PM
+-- Generation Time: Jul 17, 2021 at 07:45 PM
 -- Server version: 8.0.25
 -- PHP Version: 7.4.16
 
@@ -193,7 +193,13 @@ INSERT INTO `reviews` (`reviewId`, `reviewText`, `reviewDate`, `InvId`, `clientI
 (9, 'Awesome bike to modify and really make your own!', '2021-07-15 13:52:58', 29, 28),
 (10, 'That thing is a death trap! ', '2021-07-15 14:11:41', 29, 30),
 (12, 'Cool black car', '2021-07-15 20:57:47', 10, 28),
-(18, 'Nothing will stop this truck! It just keeps going and going!', '2021-07-16 12:16:31', 4, 28);
+(18, 'Nothing will stop this truck! It just keeps going and going!', '2021-07-16 12:16:31', 4, 28),
+(19, 'Final Project review! This fire truck is awesome. It sprays lots of water!', '2021-07-16 15:00:56', 8, 30),
+(20, 'cool review', '2021-07-16 15:23:33', 7, 30),
+(21, 'Basic car gets you there.', '2021-07-16 15:25:25', 9, 30),
+(22, 'Great car!', '2021-07-16 15:49:21', 9, 30),
+(23, 'I like back to the future!', '2021-07-17 13:41:49', 28, 29),
+(24, 'Great big car! Very spacious.', '2021-07-17 13:42:36', 12, 29);
 
 --
 -- Indexes for dumped tables
@@ -265,7 +271,7 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `reviewId` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `reviewId` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Constraints for dumped tables
