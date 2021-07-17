@@ -92,7 +92,7 @@ function buildReviewForm($screenName, $invId, $clientId) {
    $reviewForm .= '<label for="screenName">Screen Name</label><br>';
    $reviewForm .= "<input type='text' id='screenName' name='screenName' value='$screenName' required readonly><br>";
    $reviewForm .= '<label for="reviewText">Review</label><br>';
-   $reviewForm .= '<textarea rows = "none" cols="none" id="reviewText" name="reviewText" required></textarea><br>';
+   $reviewForm .= '<textarea id="reviewText" name="reviewText" required></textarea><br>';
    $reviewForm .= '<input type="submit" name="submit" value="Submit Review" id="signInButton"><br>';
    $reviewForm .= "<input type='hidden' name='invId' value='$invId'>";
    $reviewForm .= "<input type='hidden' name='clientId' value='$clientId'>";
